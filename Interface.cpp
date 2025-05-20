@@ -14,7 +14,7 @@
 #include "Polynomial.h"
 #include "Exponential.h"
 #include "Interface.h"
-
+/// @brief menu
 void Menu(){
     vector<Function*> f;
     int userchoice=0;
@@ -78,7 +78,7 @@ void Menu(){
         }
     }
 }
-
+/// @brief print the menu instructions
 void PrintMenu(){
     cout<<"---Function menu:---"<<endl;
     cout<<"Type:"<<endl;
@@ -89,7 +89,8 @@ void PrintMenu(){
     cout<<"4 - Elimina tutte le funzioni"<<endl;
     cout<<"5 - Seleziona una funzione"<<endl;
 }
-
+/// @brief print the list of functions
+///	@param f list of functions
 void Showlist(vector<Function*> &f){
     cout << "Your Functions:" << endl;
     for(int j=0; j < f.size();j++){
@@ -97,7 +98,8 @@ void Showlist(vector<Function*> &f){
         (f.at(j))->Dump();
     }
 }
-
+/// @brief insert the functions in the list
+///	@param f list of functions
 int InsertFun(vector<Function*> &f){
     cout << "You can insert an Exponential function or a Polynomial function. " << endl;
     cout << "Type 0 to insert an Exponential, 1 to insert a Polynomial, others to quit: "<< endl;
@@ -160,7 +162,8 @@ int InsertFun(vector<Function*> &f){
         return 0;
      
 }
-
+/// @brief delete a function in the list 
+///	@param f list of functions
 int DeleteFun(vector<Function*> &f){
     int i = f.size();
     int choice=0;
@@ -184,7 +187,8 @@ int DeleteFun(vector<Function*> &f){
     }
     return 0;
 }
-
+/// @brief delete all the function in the list 
+///	@param f list of functions
 int DeleteAll(vector<Function*> &f){
     cout << "If you want to delete all print 1:"<< endl;
     int a=0;
@@ -195,7 +199,9 @@ int DeleteAll(vector<Function*> &f){
     }
     return 0;
 }
-
+/// @brief return the value of a function in the list given a input
+///	@param f list of functions
+/// @return the value of the function
 double SelectFun(vector<Function*> &f){
     int i = f.size();
     int choice=0;
