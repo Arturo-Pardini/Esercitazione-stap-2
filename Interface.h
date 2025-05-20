@@ -17,9 +17,9 @@
 #include "Exponential.h"
 void Menu();
 void PrintMenu();
-void Showlist(vector<Function*> f);//W
-int InsertFun(vector<Function*> f);//W
-int DeleteFun(vector<Function*> f);//W
-int DeleteAll(vector<Function*> f);//W
-int SelectFun(vector<Function*> f);//W
+void Showlist(vector<Function*> &f);//W
+int InsertFun(vector<Function*> &f);//W
+int DeleteFun(vector<Function*> &f);//W
+int DeleteAll(vector<Function*> &f);//W
+double SelectFun(vector<Function*> &f);//W
 #endif

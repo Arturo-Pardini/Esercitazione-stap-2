@@ -18,16 +18,18 @@
 void Menu(){
     vector<Function*> f;
     int userchoice=0;
-    int i, j, k,p;
+    int i, j, k;
+    double p;
     while(1){
         PrintMenu();
-        cin>>userchoice;
+        cin >> userchoice;
         switch(userchoice)
         {
         case 0:
-            exit(-1);
+            return;
         case 1:
             Showlist(f);
+            cout<<endl;
             break;
         case 2:
         
@@ -39,47 +41,44 @@ void Menu(){
             else{
                 cout<<"Function not inserted :("<<endl;
             }
+            cout<<endl;
             break;
         
 
         case 3:
             j=0;
             j=DeleteFun(f);
-            if(i==1){
+            if(j==1){
                 cout<<"Function deleted!"<<endl;
             }
             else{
                 cout<<"Function not deleted :("<<endl;
             }
-
+            cout<<endl;
             break;
         case 4:
             k=0;
             k=DeleteAll(f);
-            if(i==1){
+            if(k==1){
                 cout<<"All functions deleted!"<<endl;
             }
             else{
                 cout<<"All functions not deleted :("<<endl;
             }
-
+            cout<<endl;
             break;
         case 5:
             p=0;
             p=SelectFun(f);
-            if(i==1){
-                cout<<"Done!"<<endl;
-            }
-            else{
-                cout<<"not done :("<<endl;
-            }
-
+            cout<< "the result is: " << p <<endl;
+            cout<<endl;
             break;
         default:
-            exit(-1);    
+            return;    
         }
     }
 }
+
 void PrintMenu(){
     cout<<"---Function menu:---"<<endl;
     cout<<"Type:"<<endl;
@@ -90,22 +89,22 @@ void PrintMenu(){
     cout<<"4 - Elimina tutte le funzioni"<<endl;
     cout<<"5 - Seleziona una funzione"<<endl;
 }
-void Showlist(vector<Function*> f){
-    int i = f.size();
-    cout << "Youf Functions:" << endl;
-    for(int j=0;i<=(i-1);j++){
+
+void Showlist(vector<Function*> &f){
+    cout << "Your Functions:" << endl;
+    for(int j=0; j < f.size();j++){
         cout << (j+1) << ")";
         (f.at(j))->Dump();
-        cout << endl;
     }
 }
-int InsertFun(vector<Function*> f){
+
+int InsertFun(vector<Function*> &f){
     cout << "You can insert an Exponential function or a Polynomial function. " << endl;
     cout << "Type 0 to insert an Exponential, 1 to insert a Polynomial, others to quit: "<< endl;
     int a;
     cin >> a;
-    Exponential e;
-    Polynomial p;
+    Exponential* e;
+    Polynomial*  p;
     switch(a)
     {
     case 0 :
@@ -116,7 +115,7 @@ int InsertFun(vector<Function*> f){
         cin>>b;
         cin>>k;
         cin>>c;
-        e.SetExponential(b,k,c);
+        e = new Exponential(b, k ,c);
         break;
     case 1 :
         int deg;
@@ -125,21 +124,21 @@ int InsertFun(vector<Function*> f){
         cin>>deg;
         param = new double [deg+1];
         cout <<"Insert the coefficents of the Polynomial" << endl;
-        for(int j=0;j<=deg+1;j++){
+        for(int j=0;j<=deg;j++){
             cin>>param[j];
         }
-        p.SetPolynomial(param,deg+1);
+        p= new Polynomial(param,deg+1);
         break;
     default:
-        exit(-1);
+        return 0;
     }
     int choice=0;
     if(a==0){
         cout <<"If you want to insert this Exponential type 1 :"<<endl;
-        e.Dump();
+        e->Dump();
         cin>>choice;
         if(choice==1){
-            f.push_back(&e);
+            f.push_back(e);
             return choice;
         }
         else
@@ -148,10 +147,10 @@ int InsertFun(vector<Function*> f){
     }
     else if(a==1){
         cout <<"If you want to insert this Polynomial type 1 :"<<endl;
-        p.Dump();
+        p->Dump();
         cin>>choice;
         if(choice==1){
-            f.push_back(&p);
+            f.push_back(p);
             return 1;
         }
         else
@@ -161,7 +160,8 @@ int InsertFun(vector<Function*> f){
         return 0;
      
 }
-int DeleteFun(vector<Function*> f){
+
+int DeleteFun(vector<Function*> &f){
     int i = f.size();
     int choice=0;
     int confirm=0;
@@ -184,7 +184,8 @@ int DeleteFun(vector<Function*> f){
     }
     return 0;
 }
-int DeleteAll(vector<Function*> f){
+
+int DeleteAll(vector<Function*> &f){
     cout << "If you want to delete all print 1:"<< endl;
     int a=0;
     cin>>a;
@@ -194,10 +195,12 @@ int DeleteAll(vector<Function*> f){
     }
     return 0;
 }
-int SelectFun(vector<Function*> f){
+
+double SelectFun(vector<Function*> &f){
     int i = f.size();
     int choice=0;
     double x;
+    double result=0.;
     while(1){
     cout << "Insert the ID of the function you want to valutate(-1 to exit):"<<endl;
     cin>>choice;
@@ -205,13 +208,14 @@ int SelectFun(vector<Function*> f){
         (f.at(choice-1))->Dump();
         cout << "Insert the value of x:"<<endl;
         cin>>x;
-        (f.at(choice-1))->GetValue(x);
+        result=(f.at(choice-1))->GetValue(x);
         cout<<endl;
+        return result;
     }
     else if(choice==-1)
         break;
     else
         cout <<"not valid ID" << endl;
     }
-    return 0;
+    return result;
 }

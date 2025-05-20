@@ -87,7 +87,6 @@ double Exponential::GetValue(double in){
 void Exponential::Dump() {
 
 	int i;
-	cout << "Your exponential:" << endl;
 	if (k_coeff == 0 || b_coeff==0) {
 		cout << b_coeff << endl;
 		return;
