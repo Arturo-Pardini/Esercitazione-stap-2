@@ -1,5 +1,5 @@
-/*! @file Polynomial.cpp
-	@brief Implementation of Exponential class 
+/*! @file Exponential.cpp
+	@brief Implementation of exponential class 
 	@author Arturo Pardini
 
 	Details.

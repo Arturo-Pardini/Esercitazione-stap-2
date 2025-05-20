@@ -1,5 +1,5 @@
 /*! @file Polynomial.cpp
-	@brief Implementation of Polynomial class 
+	@brief Implementation of polynomial class 
 	@author Arturo Pardini
 
 	Details.

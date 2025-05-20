@@ -1,4 +1,4 @@
-/*! @file Interface.cpp
+/*! @file Interface.h
 	@brief Function of the Interface 
 	@author Arturo Pardini
 
