@@ -1,5 +1,5 @@
 /*! @file Interface.h
-	@brief Function of the Interface 
+	@brief functions of the Interface 
 	@author Arturo Pardini
 
 	Details.
