@@ -104,7 +104,7 @@ int InsertFun(vector<Function*> &f){
     cout << "You can insert an Exponential function or a Polynomial function. " << endl;
     cout << "Type 0 to insert an Exponential, 1 to insert a Polynomial, others to quit: "<< endl;
     int a;
-    cin >> a;
+    a = Input<int>();
     Exponential* e;
     Polynomial*  p;
     switch(a)
@@ -114,20 +114,24 @@ int InsertFun(vector<Function*> &f){
 		double k;
 		double c;
         cout<<"Insert the coefficents (b,k,c) of your Exponential:"<<endl;
-        cin>>b;
-        cin>>k;
-        cin>>c;
+        b= Input<double>();
+        k= Input<double>();
+        c= Input<double>();
         e = new Exponential(b, k ,c);
         break;
     case 1 :
         int deg;
         double* param;
         cout <<"What is the degree of your Polynomial?" << endl;
-        cin>>deg;
+        deg = Input<int>();
         param = new double [deg+1];
+        if(param==NULL){
+            cout<<"Error- cannot allocate memory.";
+            exit(-1);
+        }
         cout <<"Insert the coefficents of the Polynomial" << endl;
         for(int j=0;j<=deg;j++){
-            cin>>param[j];
+            param[j]= Input<double>();
         }
         p= new Polynomial(param,deg+1);
         break;
@@ -138,7 +142,7 @@ int InsertFun(vector<Function*> &f){
     if(a==0){
         cout <<"If you want to insert this Exponential type 1 :"<<endl;
         e->Dump();
-        cin>>choice;
+        choice = Input<int>();
         if(choice==1){
             f.push_back(e);
             return choice;
@@ -150,7 +154,7 @@ int InsertFun(vector<Function*> &f){
     else if(a==1){
         cout <<"If you want to insert this Polynomial type 1 :"<<endl;
         p->Dump();
-        cin>>choice;
+        choice = Input<int>();
         if(choice==1){
             f.push_back(p);
             return 1;
@@ -170,11 +174,11 @@ int DeleteFun(vector<Function*> &f){
     int confirm=0;
     while(1){
     cout << "Insert the ID of the function you want to erase(-1 to exit):"<<endl;
-    cin>>choice;
+    choice = Input<int>();
     if(choice > 0 && choice <= i){
         cout <<"If you want to erase this Function type 1 :"<<endl;
         (f.at(choice-1))->Dump();
-        cin>>confirm;
+        confirm = Input<int>();
         if(confirm==1){
             f.erase (f.begin()+(choice-1));
             return 1;
@@ -192,7 +196,7 @@ int DeleteFun(vector<Function*> &f){
 int DeleteAll(vector<Function*> &f){
     cout << "If you want to delete all print 1:"<< endl;
     int a=0;
-    cin>>a;
+    a = Input<int>();
     if(a==1){
         f.clear();
         return 1;
@@ -209,11 +213,11 @@ double SelectFun(vector<Function*> &f){
     double result=0.;
     while(1){
     cout << "Insert the ID of the function you want to valutate(-1 to exit):"<<endl;
-    cin>>choice;
+    choice = Input<int>();
     if(choice > 0 && choice <= i){
         (f.at(choice-1))->Dump();
         cout << "Insert the value of x:"<<endl;
-        cin>>x;
+        x= Input<double>();
         result=(f.at(choice-1))->GetValue(x);
         cout<<endl;
         return result;
@@ -224,4 +228,20 @@ double SelectFun(vector<Function*> &f){
         cout <<"not valid ID" << endl;
     }
     return result;
+}
+///@brief Inser parameters whit controls, is a bad way to overload the cin.
+///@return the parameter
+template<class T> T Input(){
+    T a;
+    while(1){
+        cin >> a;
+        if(cin.fail()){
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout<<"ERROR: imput must be a number"<<endl;
+        }
+        else{
+            return a;
+        }
+    }
 }

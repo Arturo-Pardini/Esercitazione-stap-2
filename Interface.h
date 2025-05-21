@@ -26,6 +26,9 @@ int DeleteFun(vector<Function*> &f);
 int DeleteAll(vector<Function*> &f);
 double SelectFun(vector<Function*> &f);
 ///@}
-
+///@name Controll functions
+///@{
+template<class T> T Input();
+///@}
 
 #endif
